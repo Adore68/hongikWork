@@ -1,8 +1,12 @@
+/*
+Gauss-Jordan elimination
+*/
+
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <stdlib.h>
 
-//Gauss-Jordan elimination 구현하기
+
 int main() {
 	int arraySize; 
 
@@ -21,6 +25,8 @@ int main() {
 			scanf("%d", &arr[i][j]);
 		}
 	}
+
+
 
 	
 }
