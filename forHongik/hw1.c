@@ -7,7 +7,7 @@ Gauss-Jordan elimination
 #include <stdio.h>
 #include <stdlib.h>
 
-void swap(double **arr, int arraySize, int row1, int row2);
+void swap(int arraySize, int row1, int row2);
 
 int main() {
 	int arraySize;
@@ -30,21 +30,19 @@ int main() {
 
 	/*3. Gauss 소거법*/	
 	if (arr[0][0] == 0) { // 3-(1) R1의 첫번째 계수가 0이면 R2 행과 교환하고
-		for (int i = 0; i < arraySize; i++) {
-			for (int j = i + 1; j < arraySize; j++) {
-				swap(arr, arraySize, i, j);
-			}
-		}
+		for (int j = 0; j < (arraySize+1); j++) {
+			swap(arraySize, arr[0][j], arr[1][j]);
+		}		
 	}
 	else if (arr[0][0] != 0) { // 3-(1) 0이 아니면 R1에 첫번째 계수의 역수를 곱한다.	
 		double reverseA00 = 1 / arr[0][0];
 		for (int j = 0; j < (arraySize + 1); j++) {
 			arr[0][j] *= reverseA00; // R1에 역수를 곱해 a00을 1로 만들어준다
 		}
-		
+
 		// 3-(2) R1에 R2의 첫번째 계수의 음수값 만큼 곱한 뒤 R2에 더한다. (이때 a10을 0으로 만들어주기 위함)
 		double multiplyA10 = arr[1][0]; //R2의 첫번째 계수 
-		for (int j = 0; j < (arraySize + 1); j++) {	
+		for (int j = 0; j < (arraySize + 1); j++) {
 			arr[1][j] = arr[1][j] + (-multiplyA10) * arr[0][j]; // 새로운 R2 =  기존의 R2 + (-a10) * R1
 		}
 
@@ -63,14 +61,14 @@ int main() {
 		// 3-(5) R2에 R3의 두번째 계수의 음수값 만큼 곱한 뒤 R3에 더한다. (a21을 0으로 만들어주기 위함)
 		double multiplyA22 = arr[2][1];
 		for (int j = 0; j < (arraySize + 1); j++) {
-			arr[2][j] = arr[2][j] + (-multiplyA22) * arr[1][j]; 
+			arr[2][j] = arr[2][j] + (-multiplyA22) * arr[1][j];
 		}
-		
+
 		// 3-(6) R3에 세번째 계수의 역수를 곱한다. (a22를 1로 만들어주기 위함)
 		double reverseA22 = 1 / arr[2][2];
 		for (int j = 0; j < (arraySize + 1); j++) {
 			arr[2][j] *= reverseA22; //R3에 역수를 곱해 a22을 1로 만들어준다
- 		}
+		}
 
 		/*여기부턴 Gauss-Jordan 소거법*/
 
@@ -91,11 +89,8 @@ int main() {
 		for (int j = 0; j < (arraySize + 1); j++) {
 			arr[0][j] = arr[0][j] + (-multiplyA01) * arr[1][j];
 		}
-	}
-	
-	
-	
 
+	}
 	//결과 출력
 	printf("Output result : \n");
 	for (int i = 0; i < arraySize; i++) {
@@ -104,15 +99,14 @@ int main() {
 		}
 		printf("\n");
 	}
+
+	free(arr); // 동적 메모리 할당 해제
 }
 	
 
 /*R1의 첫번째 계수가 0일때 R2와 행 교환하는 함수 */
-void swap(double **arr, int arraySize, int row1, int row2) { 
-	for (int j = 0; j < (arraySize + 1); j++) {
-		int temp = arr[row1][j];
-		arr[row1][j] = arr[row2][j];
-		arr[row2][j] = temp;
-
-	}
+void swap(int arraySize, int row1, int row2) { 	
+		int temp = row1;
+		row1 = row2;
+		row2 = temp;
 }
