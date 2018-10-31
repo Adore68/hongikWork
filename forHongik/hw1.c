@@ -1,4 +1,4 @@
-/*
+*/*
 Gauss-Jordan elimination
 이산수학 시간에 배운 가우스조던 소거법을 실습해봅니다
 
@@ -34,7 +34,7 @@ int main() {
 	}
 
 	if (arraySize >= 2 && arraySize <= 10) { // 3. 조건1 : n은 2<=n<=10 사이만	
-		ㅜfor (int i = 0; i < arraySize; i++) { 
+		for (int i = 0; i < arraySize; i++) { 
 			for (int j = i+1; j < arraySize; j++) {
 				if (arr[i][0] == 0) {  // 4. 조건2 : R1의 첫번째 계수가 0일 경우 다른 행과 swap 
 					swap(arr, arraySize, i, j);
@@ -64,7 +64,7 @@ int main() {
 }
 	
 
-/*R1의 첫번째 계수가 0일때 다른 행 교환하는 함수 */
+/* R1의 첫 번째 계수가 0일 때 다른 행과 교환하는 함수 */
 void swap(float **arr, int arraySize, int row1, int row2) {
 	for (int j = 0; j < (arraySize + 1); j++) {
 		int temp = arr[row1][j];
