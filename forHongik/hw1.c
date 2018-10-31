@@ -1,8 +1,8 @@
 /*
 Gauss-Jordan elimination
-ÀÌ»ê¼öÇĞ ½Ã°£¿¡ ¹è¿î °¡¿ì½ºÁ¶´ø ¼Ò°Å¹ıÀ» ½Ç½ÀÇØº¾´Ï´Ù
+ì´ì‚°ìˆ˜í•™ ì‹œê°„ì— ë°°ìš´ ê°€ìš°ìŠ¤ì¡°ë˜ ì†Œê±°ë²•ì„ ì‹¤ìŠµí•´ë´…ë‹ˆë‹¤
 
-@author : ±èÁöÇö(B471008)
+@author : ê¹€ì§€í˜„(B471008)
 @date : 2018.10.31
 */
 
@@ -18,53 +18,53 @@ int main() {
 	int arraySize;
 
 	printf("Matirx size: ");
-	scanf("%d", &arraySize); // 1. n by n Çà·ÄÀ» ¸¸µé n ÀÔ·Â
+	scanf("%d", &arraySize); // 1. n by n í–‰ë ¬ì„ ë§Œë“¤ n ì…ë ¥
 
-	float **arr; //ÀÌÂ÷¿ø ¹è¿­ µ¿ÀûÇÒ´ç
+	float **arr; //ì´ì°¨ì› ë°°ì—´ ë™ì í• ë‹¹
 	arr = (float**)malloc(sizeof(int*) * arraySize);
 	for (int i = 0; i < arraySize; i++) {
 		arr[i] = (float*)malloc(sizeof(float) * (arraySize + 1));
 	}
 
-	printf("input elements : \n"); // 2. Çà·ÄÀÇ ¸ğµç ¿ä¼Ò ÀÔ·Â
+	printf("input elements : \n"); // 2. í–‰ë ¬ì˜ ëª¨ë“  ìš”ì†Œ ì…ë ¥
 	for (int i = 0; i < arraySize; i++) {
 		for (int j = 0; j < (arraySize+1); j++) {
 			scanf("%f", &arr[i][j]);
 		}
 	}
 
-	if (arraySize >= 2 && arraySize <= 10) { // 3. Á¶°Ç1 : nÀº 2<=n<=10 »çÀÌ¸¸	
-		for (int i = 0; i < arraySize; i++) { 
+	if (arraySize >= 2 && arraySize <= 10) { // 3. ì¡°ê±´1 : nì€ 2<=n<=10 ì‚¬ì´ë§Œ	
+		ã…œfor (int i = 0; i < arraySize; i++) { 
 			for (int j = i+1; j < arraySize; j++) {
-				if (arr[i][0] == 0) {  // 4. Á¶°Ç2 : R1ÀÇ Ã¹¹øÂ° °è¼ö°¡ 0ÀÏ °æ¿ì ´Ù¸¥ Çà°ú swap 
+				if (arr[i][0] == 0) {  // 4. ì¡°ê±´2 : R1ì˜ ì²«ë²ˆì§¸ ê³„ìˆ˜ê°€ 0ì¼ ê²½ìš° ë‹¤ë¥¸ í–‰ê³¼ swap 
 					swap(arr, arraySize, i, j);
 				}
 			}
 		}
 
-		gaussElimination(arr, arraySize); // 5. °¡¿ì½º elimination
-		gaussJordanElimination(arr, arraySize); // 6. °¡¿ì½ºÁ¶´ø elimination
+		gaussElimination(arr, arraySize); // 5. ê°€ìš°ìŠ¤ elimination
+		gaussJordanElimination(arr, arraySize); // 6. ê°€ìš°ìŠ¤ì¡°ë˜ elimination
 	}
 	else {
-		printf("nÀº 2¿¡¼­ 10 »çÀÌÀÇ ¼ıÀÚ¸¸ °¡´ÉÇÕ´Ï´Ù. ´Ù½Ã ÀÔ·ÂÇÏ¼¼¿ä~");
+		printf("nì€ 2ì—ì„œ 10 ì‚¬ì´ì˜ ìˆ«ìë§Œ ê°€ëŠ¥í•©ë‹ˆë‹¤. ë‹¤ì‹œ ì…ë ¥í•˜ì„¸ìš”~");
 	}
 
-	printf("output result : \n"); // 7. °á°úÃâ·Â
+	printf("output result : \n"); // 7. ê²°ê³¼ì¶œë ¥
 	for (int i = 0; i < arraySize; i++) {
 		for (int j = 0; j < (arraySize + 1); j++) {
 			if (j != arraySize) {
-				printf("%d ", (int)arr[i][j]); // outputÀº 0°ú 1 Á¤¼ö·Î ³ªÅ¸³»±â À§ÇØ
+				printf("%d ", (int)arr[i][j]); // outputì€ 0ê³¼ 1 ì •ìˆ˜ë¡œ ë‚˜íƒ€ë‚´ê¸° ìœ„í•´
 			} else if (j == arraySize)
-			printf("%f ", arr[i][j]); // resultÀº ¼Ò¼ıÁ¡ ¿©¼¸Â°±îÁö ³ªÅ¸³»±â À§ÇØ
+			printf("%f ", arr[i][j]); // resultì€ ì†Œìˆ«ì  ì—¬ì„¯ì§¸ê¹Œì§€ ë‚˜íƒ€ë‚´ê¸° ìœ„í•´
 		}
 		printf("\n");
 	}
 
-	free(arr); // µ¿Àû ¸Ş¸ğ¸® ÇÒ´ç ÇØÁ¦
+	free(arr); // ë™ì  ë©”ëª¨ë¦¬ í• ë‹¹ í•´ì œ
 }
 	
 
-/*R1ÀÇ Ã¹¹øÂ° °è¼ö°¡ 0ÀÏ¶§ ´Ù¸¥ Çà ±³È¯ÇÏ´Â ÇÔ¼ö */
+/*R1ì˜ ì²«ë²ˆì§¸ ê³„ìˆ˜ê°€ 0ì¼ë•Œ ë‹¤ë¥¸ í–‰ êµí™˜í•˜ëŠ” í•¨ìˆ˜ */
 void swap(float **arr, int arraySize, int row1, int row2) {
 	for (int j = 0; j < (arraySize + 1); j++) {
 		int temp = arr[row1][j];
@@ -75,9 +75,9 @@ void swap(float **arr, int arraySize, int row1, int row2) {
 }
 
 
-/*°¡¿ì½º elimination
-@param float reverse - Çà·ÄÀÇ ´ë°¢¼±À» 1·Î ¸¸µé¾îÁÖ±â À§ÇÑ º¯¼ö
-@param float elimination - Ã¹¹øÂ° ÇàºÎÅÍ n¹øÂ° Çà±îÁö ´ë°¢¼± »©°í ¸ğµÎ 0À¸·Î ¼Ò°ÅÇØÁÖ´Â º¯¼ö
+/*ê°€ìš°ìŠ¤ elimination
+@param float reverse - í–‰ë ¬ì˜ ëŒ€ê°ì„ ì„ 1ë¡œ ë§Œë“¤ì–´ì£¼ê¸° ìœ„í•œ ë³€ìˆ˜
+@param float elimination - ì²«ë²ˆì§¸ í–‰ë¶€í„° në²ˆì§¸ í–‰ê¹Œì§€ ëŒ€ê°ì„  ë¹¼ê³  ëª¨ë‘ 0ìœ¼ë¡œ ì†Œê±°í•´ì£¼ëŠ” ë³€ìˆ˜
 */
 void gaussElimination(float **arr, int arraySize) {
 	float reverse; 
@@ -86,21 +86,21 @@ void gaussElimination(float **arr, int arraySize) {
 	for (int i = 0; i < arraySize; i++) {	
 		for (int j = 0; j < (arraySize + 1); j++) {
 			reverse = 1 / arr[i][i];
-			arr[i][j] = arr[i][j] * reverse; //¿©±â±îÁö aii 1·Î ¸¸µé±â
+			arr[i][j] = arr[i][j] * reverse; //ì—¬ê¸°ê¹Œì§€ aii 1ë¡œ ë§Œë“¤ê¸°
 				
 			for (int k = i + 1; k < arraySize; k++) {
-				elimination = arr[k][j]; //¼Ò°ÅÇØÁÖ´Â »ó¼ö´Â ¼Ò°ÅÇÏ°íÀÚÇÏ´Â ÇàÀÇ °è¼ö¿¡ À½¼ö°ª °öÇÑ°É ¹Ù·Î Àü Çà¿¡ °öÇÑ°Í
+				elimination = arr[k][j]; //ì†Œê±°í•´ì£¼ëŠ” ìƒìˆ˜ëŠ” ì†Œê±°í•˜ê³ ìí•˜ëŠ” í–‰ì˜ ê³„ìˆ˜ì— ìŒìˆ˜ê°’ ê³±í•œê±¸ ë°”ë¡œ ì „ í–‰ì— ê³±í•œê²ƒ
 				arr[k][j] = arr[k][j] - (arr[i][j] * elimination);
 			}		
 		}				
 	}
 }
 
-/*°¡¿ì½ºÁ¶´ø elimination
-°¡¿ì½º eliminatioÀ» ¿ª¼ö·Î ÇÏ¸é °¡¿ì½ºÁ¶´ø elmination
+/*ê°€ìš°ìŠ¤ì¡°ë˜ elimination
+ê°€ìš°ìŠ¤ eliminationì„ ì—­ìœ¼ë¡œ í•˜ë©´ ê°€ìš°ìŠ¤ì¡°ë˜ elmination
 */
 void gaussJordanElimination(float **arr, int arraySize) {
-	float elimination; // °¡¿ì½º ¼Ò°Å¹ı°ú ¹æ¹ıÀº µ¿ÀÏÇÑµ¥ ÀÌ¹ø¿£ ÇàÀÇ ¸Ç ³¡ ¹Ø¿¡¼­ À§·Î, ¿À¸¥ÂÊ¿¡¼­ ¿ŞÂÊÀ¸·Î
+	float elimination; // ê°€ìš°ìŠ¤ ì†Œê±°ë²•ê³¼ ë°©ë²•ì€ ë™ì¼í•œë° ì´ë²ˆì—” í–‰ì˜ ë§¨ ë ë°‘ì—ì„œ ìœ„ë¡œ, ì˜¤ë¥¸ìª½ì—ì„œ ì™¼ìª½ìœ¼ë¡œ
 
 	for (int i = (arraySize - 1); i > 0; i--) { 
 		for (int j = (arraySize - 1); j > 0; j--) { 
