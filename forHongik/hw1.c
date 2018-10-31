@@ -1,4 +1,4 @@
-*/
+/*
 Gauss-Jordan elimination
 이산수학 시간에 배운 가우스조던 소거법을 실습해봅니다
 
